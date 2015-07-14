@@ -16,7 +16,7 @@ struct Y {
 	operator int(){ cout << "in Y::operator int()" << endl; return 0; }
 };
 
-X operator*(X, Y){ cout << "int operator*(X,Y)" << endl; }
+X operator*(X, Y){ cout << "int operator*(X,Y)" << endl; return X(0); }
 int f(X){ cout << "in f(X)" << endl; return 0; }
 
 X x = 1;
