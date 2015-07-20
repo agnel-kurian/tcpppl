@@ -60,15 +60,18 @@ int main(){
 	int v[200];
 	Ptr_to_T<int> p(&v[0], v, 200);
 	p--;
+
 	try {
 		*p = 42;
 	}
 	catch(Out_of_range){
 		cout << "pointer was out of range" << endl;
 	}
+
 	++p;
 	*p = 42;
 	cout << *p << endl;
+
 	return 0;
 }
 
