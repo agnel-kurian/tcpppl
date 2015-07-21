@@ -29,18 +29,47 @@ public:
 		}
 	}
 
-	Node(const string& s, Node *l = 0, Node *r = 0) : s(s), n(1), l(l), r(r) {}
-	void print_all(){
-		cout << s << ": " << n << endl;
-		if(l) l->print_all();
-		if(r) r->print_all();
+	Node(const string& s, Node *l = 0, Node *r = 0)
+		: s(s), n(1), l(l), r(r) {}
+
+	void print_all(int indent = 0){
+		string ind(indent, ' ');
+		cout << ind << s << ": " << n << endl;
+		if(l) l->print_all(++indent);
+		if(r) r->print_all(indent);
+		--indent;
 	}
 
 	~Node(){
 		if(l) delete l;
 		if(r) delete r;
 	}
+
+	Node* find(const char* c_str);
+	Node* find(const string& s);
+
+	int count() const throw() { return n; }
+  const string& str(){ return s; }
 };
+
+class Not_found {
+};
+
+Node *Node::find(const char* c_str){
+	string s(c_str);
+	return find(s);
+}
+
+Node *Node::find(const string& s){
+		Node *p = this;
+		while(p){
+			if(s < p->s) p = p->l;
+			else if(s > p->s) p = p->r;
+			else return p;
+		}
+
+		throw Not_found();
+}
 
 int main(){
 	string s;
@@ -52,7 +81,13 @@ int main(){
 			head->append(s);
 	}
 
-	if(head) { head->print_all(); delete head; }
+	if(head) {
+		Node *the_node = head->find("the");
+		cout << the_node->str() << ": " << the_node->count() << endl;
+		head->print_all();
+		delete head;
+	}
+
 	return 0;
 }
 
