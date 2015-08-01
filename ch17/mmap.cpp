@@ -14,8 +14,19 @@ int main(){
     cin >> k;
   }
   
-  for(multimap<string,string>::iterator i = db.begin(); i != db.end(); ++i)
+  for(multimap<string,string>::iterator i = db.begin();
+		i != db.end(); ++i)
     cout << i->first << ": " << i->second << endl;
   
+
+	string kfind;
+	cin >> kfind;
+
+	typedef multimap<string,string>::iterator I;
+	pair<I,I> p = db.equal_range(kfind);
+
+	for(I it = p.first; it != p.second; ++it)
+		cout << it->second << endl;
+
   return 0;
 }
