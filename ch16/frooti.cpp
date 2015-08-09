@@ -44,7 +44,11 @@ int main(){
   vector<string>::iterator pend = find_if(pstart, frooti.end(),
     initial_not('g'));
 
-  print(pend, frooti.end());
+  print(pstart, pend);
+  
+  frooti.erase(pstart, pend);
+  cout << "-----" << endl;
+  print(frooti.begin(), frooti.end());
   
   return 0;
 }
